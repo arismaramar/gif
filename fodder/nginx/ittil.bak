@@ -1,0 +1,167 @@
+#!/bin/bash
+# //====================================================
+# //	System Request:Debian 9+/Ubuntu 18.04+/20+
+# //	Author:	bhoikfostyahya rebuild anggun
+# //	Dscription: Xray Menu Management
+# //	email: arismar.amar@gmail.com
+# //  telegram: https://t.me/amantubilah
+# //====================================================
+# // font color configuration | ANGGUN AUTOSCRIPT
+# COLOR VALIDATION
+RED='\033[0;31m'
+NC='\033[0m'
+gray="\e[1;30m"
+Blue="\033[36m"
+GREEN='\033[0;32m'
+grenbo="\e[92;1m"
+yellow='\033[0;33m'
+ISP=$(cat /etc/xray/isp)
+CITY=$(cat /etc/xray/city)
+WKT=$(curl -s ipinfo.io/timezone)
+IPVPS=$(curl -s ipv4.icanhazip.com)
+domain=$(cat /etc/xray/domain)
+cname=$(awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo)
+cores=$(awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo)
+freq=$(awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo)
+tram=$(free -m | awk 'NR==2 {print $2}')
+swap=$(free -m | awk 'NR==4 {print $2}')
+up=$(uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
+nginx=$(systemctl status xray | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g')
+ws=$(systemctl status ws | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g')
+clear
+if [[ $nginx == "running" ]]; then
+    status_server="${grenbo}Online ✔${NC}"
+else
+    status_server="${RED}Offline ✖${NC}"
+fi
+if [[ $ws == "running" ]]; then
+    status_serverssh="${grenbo}Online ✔${NC}"
+else
+    status_serverssh="${RED}Offline ✖${NC}"
+fi
+## OUTPUT
+printf "
+$yellow      ___     $NC
+$yellow     (.. \    $NC\e[032;1mOperating System :\e[0m \e[1m$(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')\e[0m
+$yellow     (<> |    $NC\e[032;1mTotal Amount Of RAM:\e[0m \e[1m$tram MB\e[0m
+$yellow    //  \\ \\   $NC\e[032;1mIsp & City Name:\e[0m \e[1m$ISP & $CITY\e[0m
+$yellow   ( |  | /|  $NC\e[032;1mIp VPS:\e[0m \e[1m$IPVPS\e[0m
+$yellow  _/\\ __)/_)  $NC\e[032;1mDomain:\e[0m \e[1m$(cat /etc/xray/domain)\e[0m
+$yellow  \/-____\/   $NC\e[032;1mSever Uptime:\e[0m \e[1m$(uptime -p | cut -d " " -f 2-10000)\e[0m
+${RED}Fighter Tunnel${NC}(C)${Blue}https://github.com/rullpqh$NC
+"
+
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " Server SSH/OVPN Status:" $status_serverssh
+echo -e " Server Xray/Vmess Status:" $status_server
+echo -e " Server Xray/Vless Status:" $status_server
+echo -e " Server Xray/Trojan Status:" $status_server
+echo -e " Server Xray/Shadowsocks Status:" $status_server
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " [${grenbo}1${NC}] ${RED}• ${NC}Creating a SSH OVPN Account$NC$gray(add-ssh)$NC"
+echo -e " [${grenbo}2${NC}] ${RED}• ${NC}Delete SSH OVPN Account$NC$gray(del-ssh)$NC"
+echo -e " [${grenbo}3${NC}] ${RED}• ${NC}Renew SSH OVPN Account$NC$gray(renew-ssh)$NC"
+echo -e " [${grenbo}4${NC}] ${RED}• ${NC}Check SSH OVPN login Account$NC$gray(cek-ssh)$NC"
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " [${grenbo}5${NC}] ${RED}• ${NC}Creating a Vmess Account$NC$gray(add-ws)$NC"
+echo -e " [${grenbo}6${NC}] ${RED}• ${NC}Delete Vmess Account$NC$gray(del-ws)$NC"
+echo -e " [${grenbo}7${NC}] ${RED}• ${NC}Renew Vmess Account$NC$gray(renew-ws)$NC"
+echo -e " [${grenbo}8${NC}] ${RED}• ${NC}Check Vmess login Account$NC$gray(cek-ws)$NC"
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " [${grenbo}9${NC}] ${RED}• ${NC}Creating a Vless Account$NC$gray(add-vless)$NC"
+echo -e " [${grenbo}10${NC}]${RED}• ${NC}Delete Vless Account$NC$gray(del-vless)$NC"
+echo -e " [${grenbo}11${NC}]${RED}• ${NC}Renew Vless Account$NC$gray(renew-vless)$NC"
+echo -e " [${grenbo}12${NC}]${RED}• ${NC}Check Vless login Account$NC$gray(cek-vless)$NC"
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " [${grenbo}13${NC}]${RED}• ${NC}Creating a Trojan Account$NC$gray(add-tr)$NC"
+echo -e " [${grenbo}14${NC}]${RED}• ${NC}Delete Trojan Account$NC$gray(del-tr)$NC"
+echo -e " [${grenbo}15${NC}]${RED}• ${NC}Renew Trojan Account$NC$gray(renew-tr)$NC"
+echo -e " [${grenbo}16${NC}]${RED}• ${NC}Check Trojan login Account$NC$gray(cek-tr)$NC"
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " [${grenbo}17${NC}]${RED}• ${NC}Creating a Shadowsocks Account$NC$gray(add-ss)$NC"
+echo -e " [${grenbo}18${NC}]${RED}• ${NC}Delete Shadowsocks Account$NC$gray(del-ss)$NC"
+echo -e " [${grenbo}19${NC}]${RED}• ${NC}Renew Shadowsocks Account$NC$gray(renew-ss)$NC"
+echo -e " [${grenbo}20${NC}]${RED}• ${NC}Check Shadowsocks login Account$NC$gray(cek-ss)$NC"
+echo -e "\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+echo -e " [${grenbo}21${NC}]${RED}• ${NC}Backup & Restore Data VPS$NC$gray(get-backres)$NC"
+echo -e " [${grenbo}22${NC}]${RED}• ${NC}Change/Add Subdomain Cloudflare to Vps$NC$gray(get-domain)$NC"
+echo -e " [${grenbo}23${NC}]${RED}• ${NC}Server Speedtest$NC$gray(speedtest)$NC"
+echo -e " [${grenbo}24${NC}]${RED}• ${NC}Reboot server$NC$gray(reboot)$NC"
+read -p "Select From Options [ 1 - 24 ] : " menu
+case $menu in
+1)
+    add-ssh
+    ;;
+2)
+    del-ssh
+    ;;
+3)
+    renew-ssh
+    ;;
+4)
+    cek-ssh
+    ;;
+5)
+    add-ws
+    ;;
+6)
+    del-ws
+    ;;
+7)
+    renew-ws
+    ;;
+8)
+    cek-ws
+    ;;
+9)
+    add-vless
+    ;;
+10)
+    del-vless
+    ;;
+11)
+    renew-vless
+    ;;
+12)
+    cek-vless
+    ;;
+13)
+    add-tr
+    ;;
+14)
+    del-tr
+    ;;
+15)
+    renew-tr
+    ;;
+16)
+    cek-tr
+    ;;
+17)
+    add-ss
+    ;;
+18)
+    del-ss
+    ;;
+19)
+    renew-ss
+    ;;
+20)
+    cek-ss
+    ;;
+21)
+    get-backres
+    ;;
+22)
+    get-domain
+    ;;
+23)
+    speedtest
+    ;;
+24)
+    reboot
+    ;;
+*)
+    menu
+    ;;
+esac

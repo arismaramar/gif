@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>FighterTunnel</title>
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="container">
+                        <div id="identitycard" style="margin-top:80px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                       <center> <h2>Fighter Tunnel</h2> </center>
+                                       <center> <h5>Select file backup vps to upload</h5> </center>
+                                </div>
+                                <div class="panel-body">
+        <p>
+         {% with messages = get_flashed_messages() %}
+           {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success">
+             <strong>{{ message }}</strong>
+           </div>
+          {% endfor %}
+           {% endif %}
+         {% endwith %}
+        </p>
+                                    <div class="row">
+                                        <p style="padding: 9px;" class="text-center">File to upload zip</p>
+                                    </div>
+                                    <div class="row" style="padding: 15px 40px 30px;">
+                                        <form method="post" action="/" enctype="multipart/form-data">
+                                            <div class="form-group"> 
+                                                <div class="row" style="margin-bottom: 20px;">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-2"> 
+                                                        <input type="file" name="files[]" multiple="true" autocomplete="off" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="row text-center" style="padding-left: 20px;padding-right: 20px;">
+             <input type="submit" value="Submit" class="btn btn-lg btn-block btn-success" style="border-radius: 50px;background-color:hover: #2e00fa;">
+            </div>                                                 
+        </div>
+    <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Backup file</h4>
+                <p>Data backup is the process of making copies of files/data as an effort to prevent data damage or loss. Apart from that, backing up also serves to prepare a secure system so that lost data can later be recovered. The backup process is carried out before data damage or loss occurs due to human error or other problems.</p>
+ 
+        <footer class="footer">
+            <p>&copy; fightertunnel 2022. Using Xray Core.</p>
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>
+</div>
+</body>
+</html>

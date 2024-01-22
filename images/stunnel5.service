@@ -1,0 +1,11 @@
+[Unit]
+Description=Stunnel5 Service
+Documentation=https://geovpn.net https://stunnel.org
+After=syslog.target network-online.target
+
+[Service]
+ExecStart=/usr/local/geovpn/stunnel5 /etc/stunnel5/stunnel5.conf
+Type=forking
+
+[Install]
+WantedBy=multi-user.target

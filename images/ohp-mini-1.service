@@ -1,0 +1,13 @@
+[Unit]
+Description=OHP Mini ( OpenSSH )
+Documentation=https://geovpn.net
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/local/geovpn/ohp-mini -port 8088 -proxy 127.0.0.1:3128 -tunnel 127.0.0.1:22
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
